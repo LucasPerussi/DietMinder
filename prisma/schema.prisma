@@ -182,6 +182,7 @@ model goals {
   gol_user        Int
   gol_start_date  DateTime @default(now()) @db.DateTime(0)
   gol_target_date DateTime @db.DateTime(0)
+  gol_value       Float?   @db.Float
   badges          badges[]
   user            user     @relation(fields: [gol_user], references: [usr_id], onUpdate: Restrict, map: "goals_fk0")
 

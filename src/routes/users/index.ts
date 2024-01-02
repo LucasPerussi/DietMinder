@@ -195,8 +195,8 @@ routerUsers.get('/all-nutritionists', validateJWT, async (req, res) => {
 })
 
 
-
 // PATIENTS SIDE 
+
 routerUsers.post('/patient/new', validateJWT, async (req, res) => {
     const { user,  nutritionist, athlete } = req.body;
     
@@ -327,12 +327,6 @@ routerUsers.get('/all-patients', validateJWT, async (req, res) => {
 
 
 
-
-
-
-
-
-
 // LISTS
 
 routerUsers.get('/get/:user', validateJWT, async (req, res) => {
@@ -391,6 +385,8 @@ routerUsers.get('/all', validateJWT, async (req, res) => {
     }
 })
 
+
+// FUNCTIONS
 
 async function checkIfAlreadyPatient(user:number){
     const verifyNutri = await prisma.patients.findFirst({
