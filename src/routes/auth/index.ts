@@ -72,8 +72,6 @@ routerAuth.post('/login', async (req, res) => {
     }
 });
 
-
-
 routerAuth.post('/new', async (req, res) => {
     const { email, password, name, last_name, birthday, sex } = req.body;
     let role = 1;
@@ -151,6 +149,9 @@ routerAuth.post('/new', async (req, res) => {
         res.status(500).json({ message: 'Erro interno do servidor.' });
     }
 });
+
+
+
 
 routerAuth.get('/sessions', validateJWT, async (req, res) => {
     try {
