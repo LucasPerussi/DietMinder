@@ -1,0 +1,277 @@
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: 7d6cf0bbe218bf5f
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 10017
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+warn: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: caiu no checker
+info: Permissão concedida, enviando projetos
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: allow esta valendo [object Promise]
+info: Permissão concedida, enviando projetos
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: Permissão negada
+info: App ouvindo na porta 3000
+info: d5f471efa1b5961d
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 213231
+info: Permissão concedida, enviando projetos
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 213231
+info: Permissão concedida, enviando projetos
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 100001
+info: Permissão concedida, enviando projetos
+info: dacb7e90080f0314
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 100001
+info: Permissão negada
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: Permissão negada
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 100001
+info: Permissão negada
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: 77ef04b28c5fda87
+info: [object PrismaPromise]
+info: 
+Invalid `prisma.projetos.findFirst()` invocation in
+C:\xampp\htdocs\wetalk-api2\src\routes\projects\index.ts:156:48
+
+  153     console.log('Invalid session data');
+  154     return res.status(401).json({ message: 'Invalid session data' });
+  155 }
+→ 156 const projects = await prisma.projetos.findFirst({
+        where: {
+      +   prj_company: {
+      +     equals: Int | IntFieldRefInput,
+      +     in: Int[],
+      +     notIn: Int[],
+      +     lt: Int | IntFieldRefInput,
+      +     lte: Int | IntFieldRefInput,
+      +     gt: Int | IntFieldRefInput,
+      +     gte: Int | IntFieldRefInput,
+      +     not: Int | NestedIntFilter
+      +   }
+        }
+      })
+
+Argument `prj_company` is missing. {"clientVersion":"5.5.2","name":"PrismaClientValidationError"}
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: 
+Invalid `prisma.projetos.findFirst()` invocation in
+C:\xampp\htdocs\wetalk-api2\src\routes\projects\index.ts:156:48
+
+  153     console.log('Invalid session data');
+  154     return res.status(401).json({ message: 'Invalid session data' });
+  155 }
+→ 156 const projects = await prisma.projetos.findFirst({
+        where: {
+      +   prj_company: {
+      +     equals: Int | IntFieldRefInput,
+      +     in: Int[],
+      +     notIn: Int[],
+      +     lt: Int | IntFieldRefInput,
+      +     lte: Int | IntFieldRefInput,
+      +     gt: Int | IntFieldRefInput,
+      +     gte: Int | IntFieldRefInput,
+      +     not: Int | NestedIntFilter
+      +   }
+        }
+      })
+
+Argument `prj_company` is missing. {"clientVersion":"5.5.2","name":"PrismaClientValidationError"}
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: 
+Invalid `prisma.projetos.findFirst()` invocation in
+C:\xampp\htdocs\wetalk-api2\src\routes\projects\index.ts:156:48
+
+  153     console.log('Invalid session data');
+  154     return res.status(401).json({ message: 'Invalid session data' });
+  155 }
+→ 156 const projects = await prisma.projetos.findFirst({
+        where: {
+          prj_company: {
+      +     equals: Int
+          }
+        }
+      })
+
+Argument `equals` is missing. {"clientVersion":"5.5.2","name":"PrismaClientValidationError"}
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+error: Permission DENIED for user: 307 for endpoint Projects - GET - /company/:number. User role: 1 company: 10017 project: 213231
+info: Permissão negada
+info: aeaaf2acc7d7086a
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 100001
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 213231
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 213231
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 213231
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 100001
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: 
+Invalid `prisma.produtos_vendidos.findMany()` invocation in
+C:\xampp\htdocs\wetalk-api2\src\routes\projects\index.ts:163:61
+
+  160     }
+  161 });
+  162 
+→ 163 const soldProducts = await prisma.produtos_vendidos.findMany(
+Value out of range for the type. The column `sol_pro_registered_at` contained an invalid datetime value with either day or month set to zero. {"clientVersion":"5.5.2","code":"P2020","meta":{"details":"The column `sol_pro_registered_at` contained an invalid datetime value with either day or month set to zero."},"name":"PrismaClientKnownRequestError"}
+info: [object PrismaPromise]
+info: 
+Invalid `prisma.produtos_vendidos.findMany()` invocation in
+C:\xampp\htdocs\wetalk-api2\src\routes\projects\index.ts:163:61
+
+  160     }
+  161 });
+  162 
+→ 163 const soldProducts = await prisma.produtos_vendidos.findMany(
+Value out of range for the type. The column `sol_pro_registered_at` contained an invalid datetime value with either day or month set to zero. {"clientVersion":"5.5.2","code":"P2020","meta":{"details":"The column `sol_pro_registered_at` contained an invalid datetime value with either day or month set to zero."},"name":"PrismaClientKnownRequestError"}
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: [object PrismaPromise]
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: null
+info: [object Object],[object Object],[object Object],[object Object]
+info: [object PrismaPromise]
+info: [object Object]
+info: 
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 9999999
+info: [object PrismaPromise]
+info: [object Object]
+info: [object Object],[object Object],[object Object],[object Object]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 9999999
+info: [object PrismaPromise]
+info: null
+info: 
+info: [object PrismaPromise]
+info: [object Object]
+info: [object Object],[object Object],[object Object],[object Object]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 9999999
+info: [object PrismaPromise]
+info: null
+info: [object Object],[object Object],[object Object],[object Object]
+info: [object PrismaPromise]
+info: null
+info: 
+info: [object PrismaPromise]
+info: [object Object]
+info: [object Object],[object Object],[object Object],[object Object]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 9999999
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 9999999
+info: App ouvindo na porta 3000
+info: [object PrismaPromise]
+info: Permission Granted for user: 28 for endpoint Projects - GET - /company/:number. User role: 2 company: 9999 project: 9999999
+info: App ouvindo na porta 3000
+info: App finalizado

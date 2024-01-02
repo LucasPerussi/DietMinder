@@ -1,0 +1,621 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model agendas_projetos {
+  age_pro_id                Int      @id @default(autoincrement())
+  age_pro_date              DateTime @db.DateTime(0)
+  age_pro_user              Int
+  age_pro_project           Int
+  age_pro_type              Int
+  age_pro_name              String   @db.VarChar(100)
+  age_pro_created_at        DateTime @default(now()) @db.DateTime(0)
+  age_pro_description       String?  @db.Text
+  age_pro_place             String?  @db.Text
+  age_pro_responsibleWetalk Int
+  age_pro_partner           Int
+  age_pro_status            Int      @default(1)
+  age_pro_requisito         Int?
+  age_pro_duracao           String   @default("PT30M") @db.VarChar(10)
+  age_pro_company           Int
+}
+
+model andamento_entrega {
+  ane_id              Int      @id @default(autoincrement())
+  ane_processo        Int
+  ane_status          Int
+  ane_dataAtualizacao DateTime @db.DateTime(0)
+  ane_ufOrigem        String   @db.VarChar(2)
+  ane_munOrigem       String   @db.VarChar(50)
+  ane_ufDestino       String   @db.VarChar(2)
+  ane_munDestino      String   @db.VarChar(50)
+  ane_codOcorrencia   Int
+}
+
+model api_keys {
+  api_id              Int       @id @default(autoincrement())
+  api_key             String    @db.VarChar(40)
+  api_type            Int       @default(1)
+  api_status          Int       @default(1)
+  api_user            Int
+  api_company         Int
+  api_created_at      DateTime  @default(now()) @db.DateTime(0)
+  api_expiration_date DateTime? @db.DateTime(0)
+  api_name            String    @db.VarChar(100)
+}
+
+model aprovacao {
+  apv_id      Int      @id @default(autoincrement())
+  apv_user    Int
+  apv_company Int
+  apv_date    DateTime @default(now()) @db.DateTime(0)
+}
+
+model aulas_projeto {
+  aul_id           Int      @id @default(autoincrement())
+  aul_project      String   @db.VarChar(30)
+  aul_content      Int
+  aul_product      Int
+  aul_registeredBy Int
+  aul_date         DateTime @default(now()) @db.DateTime(0)
+
+  @@index([aul_product], map: "aul_product")
+  @@index([aul_project], map: "aul_project")
+}
+
+model card {
+  crd_id                Int     @id @default(autoincrement())
+  crd_user              Int
+  crd_role              String? @default("") @db.MediumText
+  crd_color             Int?
+  crd_use_company_color Int     @default(0)
+  crd_show_google       Int     @default(0)
+  crd_public_card       Int     @default(1)
+  crd_show_social       Int     @default(1)
+  crd_show_portifolio   Int     @default(1)
+  crd_show_phone        Int     @default(1)
+  crd_show_email        Int     @default(1)
+  crd_username          String  @db.VarChar(100)
+  crd_allowed           Int?    @default(0)
+  crd_style             Int     @default(1)
+  crd_banner            String  @default("NS") @db.MediumText
+  user                  user    @relation(fields: [crd_user], references: [usr_id], onDelete: Cascade, onUpdate: NoAction, map: "card_ibfk_1")
+
+  @@index([crd_user], map: "crd_user")
+  @@index([crd_username], map: "crd_username")
+}
+
+model cidade {
+  cid_id      Int    @id @default(autoincrement())
+  cid_name    String @db.VarChar(100)
+  cid_company Int
+  cid_state   Int
+  cid_user    Int
+  cid_country Int
+}
+
+model comentarios {
+  cmt_id               Int      @id @default(autoincrement())
+  cmt_user             Int
+  cmt_txt              String   @db.Text
+  cmt_picture          String   @db.Text
+  cmt_ticketIdentifier String   @db.VarChar(40)
+  cmt_authorPicture    String   @db.Text
+  cmt_authorName       String   @db.VarChar(255)
+  cmt_date             DateTime @default(now()) @db.DateTime(0)
+  cmt_company          Int
+  cmt_master           Int      @default(0)
+
+  @@index([cmt_ticketIdentifier], map: "cmt_ticketIdentifier")
+}
+
+model company {
+  com_id              Int      @id @unique(map: "com_id") @default(autoincrement())
+  com_name            String   @db.VarChar(100)
+  com_identifier      String   @unique(map: "unique") @db.VarChar(100)
+  com_password        String   @db.VarChar(100)
+  com_color           String   @db.VarChar(10)
+  com_picture         String?  @db.Text
+  com_email           String   @db.VarChar(150)
+  com_createdAt       DateTime @default(now()) @db.Date
+  com_logo            String   @db.Text
+  com_about           String?  @db.Text
+  com_platform        Int
+  com_passwordCrypted String   @db.Text
+  com_dominio1        String?  @db.VarChar(50)
+  com_dominio2        String?  @db.VarChar(50)
+  com_sla             Int      @default(1)
+  com_phone           String?  @db.VarChar(20)
+  com_website         String?  @db.Text
+  com_address         String?  @db.Text
+  com_allowBC         Int      @default(1)
+  com_allowGoogle     Int      @default(1)
+  com_forceColor      Int      @default(0)
+  com_forceDoubleStep Int      @default(0)
+  com_pendingLine     Int      @default(0)
+  com_sla_internal    Int      @default(1)
+  com_dinamicBanner   Int      @default(1)
+  com_extTickets      Int      @default(0)
+  com_extTicketsUrl   String?  @db.Text
+  com_wetalkDefault   Int      @default(0)
+  com_cnpj            String?  @db.VarChar(20)
+  user                user[]
+
+  @@index([com_dominio1, com_dominio2], map: "com_dominio1")
+}
+
+model contatos {
+  con_id               Int      @id @default(autoincrement())
+  con_cnpj             String   @unique(map: "con_cnpj") @db.VarChar(25)
+  con_nomeSocial       String   @db.VarChar(255)
+  con_nomeFantasia     String?  @db.VarChar(255)
+  con_email            String?  @db.VarChar(255)
+  con_telefone         String?  @db.VarChar(50)
+  con_endereco         String?  @db.VarChar(255)
+  con_cidade           String?  @db.VarChar(255)
+  con_estado           String?  @db.VarChar(50)
+  con_logo             String?  @db.Text
+  con_created_at       DateTime @default(now()) @db.DateTime(0)
+  con_created_by       Int?
+  con_naturezaJuridica String?  @db.Text
+  con_situacao         String?  @db.VarChar(255)
+  con_capitalSocial    Float?
+  con_atividade        String?  @db.Text
+  con_company          String?  @db.VarChar(10)
+}
+
+model content {
+  cnt_id                Int      @id @default(autoincrement())
+  cnt_title             String   @db.VarChar(255)
+  cnt_description       String   @db.LongText
+  cnt_tags              String?  @db.Text
+  cnt_contentLink       String   @db.Text
+  cnt_fk_author         Int
+  cnt_date              DateTime @default(now()) @db.Date
+  cnt_type              Int
+  cnt_banner            String   @db.Text
+  cnt_produto1          Int?
+  cnt_produto2          Int
+  cnt_unique            String   @db.Text
+  cnt_access            Int      @default(0)
+  cnt_textPreview       String   @db.Text
+  cnt_company           Int      @default(9999)
+  cnt_companyIdentifier String   @db.VarChar(30)
+  cnt_produto3          Int?
+  cnt_password          String   @db.Text
+  cnt_passwordCrypted   String   @db.Text
+  cnt_publicBanner      String?  @db.Text
+  cnt_target            Int
+
+  @@index([cnt_company], map: "cnt_company")
+  @@index([cnt_produto1], map: "cnt_produto1")
+  @@index([cnt_produto2], map: "cnt_produto2")
+  @@index([cnt_target], map: "cnt_target")
+}
+
+model country {
+  ctr_id      Int    @id @default(autoincrement())
+  ctr_name    String @db.VarChar(100)
+  ctr_company Int
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model curso {
+  cur_id             Int
+  cur_name           String   @db.VarChar(255)
+  cur_description    String   @db.Text
+  cur_banner         String   @db.Text
+  cur_target         Int
+  cur_company        Int
+  cur_platform       Int
+  cur_numberStudents Int      @default(0)
+  cur_created_at     DateTime @default(now()) @db.DateTime(0)
+  cur_pages          Int      @default(0)
+
+  @@ignore
+}
+
+model enum_social {
+  enu_id       Int    @id @default(autoincrement())
+  enu_type     Int
+  enu_url      String @db.MediumText
+  enu_username String @db.VarChar(100)
+}
+
+model estado {
+  est_id      Int    @id @default(autoincrement())
+  est_name    String @db.VarChar(100)
+  est_country Int
+  est_company Int
+}
+
+model faq {
+  faq_id         Int      @id @default(autoincrement())
+  faq_question   String?  @db.VarChar(255)
+  faq_answer     String?  @db.Text
+  faq_platform   Int      @default(0)
+  faq_product    Int      @default(0)
+  faq_author     Int?     @default(0)
+  faq_created_at DateTime @default(now()) @db.Timestamp(0)
+  faq_company    Int      @default(0)
+}
+
+model logintry {
+  try_id     Int      @id @default(autoincrement())
+  try_user   Int
+  try_date   DateTime @default(now()) @db.DateTime(0)
+  try_ip     String   @db.MediumText
+  try_status String   @db.MediumText
+}
+
+model manutencao {
+  man_id          Int      @id @default(autoincrement())
+  man_title       String   @db.VarChar(255)
+  man_description String   @db.Text
+  man_createdAt   DateTime @default(now()) @db.Date
+  man_author      Int
+  man_authorEmail String   @db.VarChar(255)
+  man_companyId   Int
+  man_picture     String   @db.Text
+  man_status      Int
+  man_type        Int
+  man_roomId      Int
+}
+
+model orcamento {
+  orc_id                Int       @id @default(autoincrement())
+  orc_identifier        String    @db.VarChar(8)
+  orc_date              DateTime  @default(now()) @db.DateTime(0)
+  orc_limitDate         DateTime? @db.DateTime(0)
+  orc_ticketReference   String?   @db.VarChar(255)
+  orc_wetalkResponsible Int?
+  orc_price             String?   @db.VarChar(200)
+  orc_partnerId         Int?
+  orc_partnerCompany    Int?
+  orc_place             String?   @db.Text
+  orc_type              Int?
+  orc_description       String?   @db.Text
+  orc_status            Int       @default(1)
+  orc_updateDate        DateTime? @default(now()) @db.DateTime(0)
+  orc_doDate            DateTime? @db.DateTime(0)
+  orc_ticketReference2  String?   @db.VarChar(60)
+  orc_ticketReference3  String?   @db.VarChar(60)
+  orc_ticketReference4  String?   @db.VarChar(60)
+  orc_ticketReference5  String?   @db.VarChar(60)
+  orc_ticketReference6  String?   @db.VarChar(60)
+
+  @@index([orc_date], map: "orc_date")
+  @@index([orc_identifier], map: "orc_identifier")
+  @@index([orc_partnerCompany], map: "orc_partnerCompany")
+  @@index([orc_partnerId], map: "orc_partnerId")
+  @@index([orc_status], map: "orc_status")
+  @@index([orc_ticketReference(length: 250)], map: "orc_ticketReference")
+  @@index([orc_type], map: "orc_type")
+}
+
+model processo_entrega {
+  etr_id                 Int      @id @default(autoincrement())
+  etr_munOrigem          String   @db.VarChar(50)
+  etr_ufOrigem           String   @db.VarChar(2)
+  etr_munDestino         String   @db.VarChar(50)
+  etr_ufDestino          String   @db.VarChar(2)
+  etr_nfe                String   @db.VarChar(15)
+  etr_serieNfe           String   @db.VarChar(1)
+  etr_cte                String   @db.VarChar(15)
+  etr_serieCte           String   @db.VarChar(1)
+  etr_valorFrete         Float
+  etr_previsaoEntrega    DateTime @db.Date
+  etr_transportadora     Int
+  etr_comprovanteEntrega String?  @db.Text
+  etr_projeto            String   @db.VarChar(10)
+  etr_contato            Int
+  etr_status             String   @default("1") @db.VarChar(255)
+  etr_dataModificacao    DateTime @default(now()) @db.DateTime(0)
+  etr_dataCriacao        DateTime @default(now()) @db.DateTime(0)
+  etr_cnpjOrigem         String   @db.VarChar(18)
+}
+
+model product {
+  pro_id         Int     @id @default(autoincrement())
+  pro_name       String  @db.VarChar(100)
+  pro_picture    String  @db.Text
+  pro_supplier   Int
+  pro_ar         Int     @default(0)
+  pro_arUrl      String? @db.Text
+  pro_company    Int?    @default(9999)
+  pro_externalId Int?
+}
+
+model produtos_projeto {
+  proprj_id           Int      @id @default(autoincrement())
+  proprj_product      Int
+  proprj_quantity     Int
+  proprj_project      String   @db.VarChar(7)
+  proprj_registeredBy Int
+  proprj_date         DateTime @default(now()) @db.DateTime(0)
+
+  @@index([proprj_product], map: "proprj_product")
+  @@index([proprj_project], map: "proprj_project")
+}
+
+model produtos_vendidos {
+  sol_pro_id            Int       @id @default(autoincrement())
+  sol_pro_product       Int
+  sol_pro_warranty      DateTime? @default(now()) @db.Date
+  sol_pro_company       Int
+  sol_pro_project       Int
+  sol_pro_registered_at DateTime  @default(now()) @db.DateTime(0)
+  sol_pro_room          String?   @default("0") @db.VarChar(100)
+  sol_pro_serial        String?   @db.VarChar(100)
+
+  @@index([sol_pro_company], map: "sol_pro_company")
+  @@index([sol_pro_product], map: "sol_pro_product")
+  @@index([sol_pro_project], map: "sol_pro_project")
+  @@index([sol_pro_room], map: "sol_pro_room")
+  @@index([sol_pro_warranty], map: "sol_pro_warranty")
+}
+
+model projetos {
+  prj_id                  Int       @id @default(autoincrement())
+  prj_number              String    @db.VarChar(7)
+  prj_contactId           Int
+  prj_company             Int
+  prj_stage               Int?
+  prj_responsible         Int?
+  prj_partner1            Int?
+  prj_partner2            Int?
+  prj_inboundtype         Int
+  prj_installationAddress String?   @db.Text
+  prj_trackerCode         String?   @db.VarChar(255)
+  prj_transporter         String?   @db.VarChar(255)
+  prj_trackingUrl         String?   @db.Text
+  prj_createdAt           DateTime  @default(now()) @db.DateTime(0)
+  prj_seller              String?   @db.VarChar(50)
+  prj_costumerEmail       String?   @db.VarChar(255)
+  prj_installationDate    DateTime? @db.Date
+  prj_configsDate         DateTime? @db.Date
+  prj_trainningDate       DateTime? @db.Date
+  prj_feedbackUrl         String    @db.Text
+  prj_costumerName        String    @db.VarChar(100)
+  prj_costumerPhone       String    @db.VarChar(20)
+  prj_cnpj                String    @db.VarChar(20)
+  prj_nfe                 String?   @db.VarChar(8)
+
+  @@index([prj_number], map: "prj_number")
+}
+
+model relatorios {
+  rel_id          Int      @id @default(autoincrement())
+  rel_user        Int
+  rel_company     Int
+  rel_type        Int
+  rel_date        DateTime @default(now()) @db.DateTime(0)
+  rel_description String   @db.VarChar(255)
+}
+
+model requests {
+  req_id     Int    @id @default(autoincrement())
+  req_name   String @db.VarChar(50)
+  req_code   String @db.VarChar(120)
+  req_user   Int
+  req_status Int
+  req_email  String @db.VarChar(255)
+}
+
+model rooms {
+  rom_id                Int      @id @default(autoincrement())
+  rom_name              String   @db.VarChar(255)
+  rom_capacity          Int
+  rom_picture           String   @default("https://i.imgur.com/iBJDbUP.jpg") @db.Text
+  rom_access            Int      @default(0)
+  rom_identifier        String   @db.VarChar(150)
+  rom_password          String   @db.Text
+  rom_passwordCrypted   String   @db.Text
+  rom_company           Int
+  rom_description       String   @db.Text
+  rom_companyIdentifier String   @db.Text
+  rom_createdAt         DateTime @default(now()) @db.Timestamp(0)
+  rom_companyName       String   @db.VarChar(100)
+  rom_wifi              String?  @db.VarChar(255)
+  rom_city              Int
+  rom_state             Int
+  rom_country           Int
+
+  @@index([rom_city], map: "rom_city")
+  @@index([rom_company], map: "rom_company")
+}
+
+model sessions {
+  ses_id              Int       @id @default(autoincrement())
+  ses_key             String    @db.VarChar(40)
+  ses_ip              String    @db.VarChar(20)
+  ses_location        String    @db.VarChar(40)
+  ses_city            String    @db.VarChar(100)
+  ses_state           String    @db.VarChar(100)
+  ses_country         String    @db.VarChar(20)
+  ses_timezone        String    @db.VarChar(100)
+  ses_status          Int       @default(1)
+  ses_company         Int
+  ses_created_at      DateTime  @default(now()) @db.DateTime(0)
+  ses_expiration_date DateTime? @db.DateTime(0)
+  ses_client          Int       @default(1)
+  ses_user            Int
+  user                user      @relation(fields: [ses_user], references: [usr_id], onDelete: Cascade, onUpdate: NoAction, map: "sessions_ibfk_1")
+
+  @@index([ses_user], map: "ses_user")
+}
+
+model sla {
+  sla_id           Int      @id @default(autoincrement())
+  sla_name         String?  @db.VarChar(150)
+  sla_duv_dispo    Int?
+  sla_duv_resp_d   Int?
+  sla_duv_resp_h   Int?
+  sla_duv_resp_m   Int?
+  sla_emerg_dispo  Int?
+  sla_emerg_res_d  Int?
+  sla_emerg_res_h  Int?
+  sla_emerg_res_m  Int?
+  sla_emerg_rec_d  Int?
+  sla_emerg_rec_h  Int?
+  sla_emerg_rec_m  Int?
+  sla_emerg_reso_d Int?
+  sla_emerg_reso_h Int?
+  sla_emerg_reso_m Int?
+  sla_crit_dispo   Int?
+  sla_crit_res_d   Int?
+  sla_crit_res_h   Int?
+  sla_crit_res_m   Int?
+  sla_crit_rec_d   Int?
+  sla_crit_rec_h   Int?
+  sla_crit_rec_m   Int?
+  sla_crit_reso_d  Int?
+  sla_crit_reso_h  Int?
+  sla_crit_reso_m  Int?
+  sla_majo_dispo   Int?
+  sla_majo_res_d   Int?
+  sla_majo_res_h   Int?
+  sla_majo_res_m   Int?
+  sla_majo_rec_d   Int?
+  sla_majo_rec_h   Int?
+  sla_majo_rec_m   Int?
+  sla_majo_reso_d  Int?
+  sla_majo_reso_h  Int?
+  sla_majo_reso_m  Int?
+  sla_mino_dispo   Int?
+  sla_mino_res_d   Int?
+  sla_mino_res_h   Int?
+  sla_mino_res_m   Int?
+  sla_mino_rec_d   Int?
+  sla_mino_rec_h   Int?
+  sla_mino_rec_m   Int?
+  sla_mino_reso_d  Int?
+  sla_mino_reso_h  Int?
+  sla_mino_reso_m  Int?
+  sla_created_at   DateTime @default(now()) @db.DateTime(0)
+  sla_company      Int?
+}
+
+model supplier {
+  sup_id   Int    @id @default(autoincrement())
+  sup_name String @db.VarChar(100)
+  sup_logo String @db.Text
+}
+
+model tickets {
+  tkt_id             Int       @id @default(autoincrement())
+  tkt_author         Int
+  tkt_email          String    @db.VarChar(255)
+  tkt_title          String    @db.VarChar(255)
+  tkt_description    String    @db.Text
+  tkt_created_at     DateTime  @default(now()) @db.DateTime(0)
+  tkt_status         Int       @default(1)
+  tkt_identifier     String    @db.VarChar(40)
+  tkt_company        Int
+  tkt_number         String?   @db.VarChar(10)
+  tkt_urgency        Int       @default(1)
+  tkt_type           Int       @default(1)
+  tkt_product        Int?
+  tkt_platform       Int?
+  tkt_room           String?   @db.VarChar(100)
+  tkt_features       Int?
+  tkt_due_date       DateTime? @db.DateTime(0)
+  tkt_reference      Int       @default(0)
+  tkt_response_limit DateTime? @db.DateTime(0)
+  tkt_recovery_limit DateTime? @db.DateTime(0)
+  tkt_wetalk         Int       @default(0)
+  tkt_sla            Int       @default(1)
+  tkt_admin          Int?      @default(0)
+  tkt_typePlatform   Int?
+  tkt_typeVC         Int?
+  tkt_typePhone      Int?
+  user               user      @relation(fields: [tkt_author], references: [usr_id], onUpdate: NoAction, map: "tickets_ibfk_1")
+
+  @@index([tkt_company], map: "tkt_company")
+  @@index([tkt_status], map: "tkt_status")
+  @@index([tkt_wetalk], map: "tkt_wetalk")
+  @@index([tkt_author], map: "tkt_author")
+}
+
+model transportadoras {
+  trs_id               Int      @id @default(autoincrement())
+  trs_nome             String   @db.VarChar(100)
+  trs_cnpj             String   @db.VarChar(18)
+  trs_userWetalk       String   @db.VarChar(100)
+  trs_passwordWetalk   String   @db.VarChar(100)
+  trs_apiDocumentation String   @db.Text
+  trs_apiKey           String   @db.VarChar(255)
+  trs_header           String   @db.VarChar(255)
+  trs_endpoint         String   @db.VarChar(255)
+  trs_hasApi           Int
+  trs_bodyExample      String   @db.Text
+  trs_createdAt        DateTime @default(now()) @db.DateTime(0)
+}
+
+model user {
+  usr_name              String     @db.VarChar(30)
+  usr_last_name         String     @db.VarChar(50)
+  usr_password          String     @db.VarChar(255)
+  usr_role              Int
+  usr_born_date         DateTime?  @db.Date
+  usr_email             String     @unique(map: "email") @db.VarChar(255)
+  usr_id                Int        @unique(map: "usr_id") @default(autoincrement())
+  usr_created_at        DateTime?  @default(now()) @db.Date
+  usr_changed_at        DateTime   @default(now()) @db.Date
+  usr_company           Int        @default(9999)
+  usr_picture           String     @default("https://i.imgur.com/N9c1ah6.png") @db.Text
+  usr_companyIdentifier String     @default("qCeUdNXRKUdcVxDyuUbw") @db.Text
+  usr_phone             String     @default("-") @db.VarChar(20)
+  usr_user              String     @db.VarChar(150)
+  usr_country           Int        @default(31)
+  usr_city              String?    @db.VarChar(100)
+  usr_public_id         String     @db.VarChar(255)
+  usr_from              Int
+  usr_profile_completed Int        @default(0)
+  usr_phone_verified    Int        @default(0)
+  usr_doubleVerify      Int        @default(1)
+  usr_theme             Int        @default(1)
+  usr_language          Int        @default(1)
+  card                  card[]
+  sessions              sessions[]
+  tickets               tickets[]
+  company               company    @relation(fields: [usr_company], references: [com_id], onUpdate: NoAction, map: "user_ibfk_1")
+
+  @@id([usr_id, usr_changed_at])
+  @@index([usr_company], map: "usr_company")
+  @@index([usr_user], map: "usr_user")
+}
+
+model whitelist {
+  wls_id         Int      @id @default(autoincrement())
+  wls_user       Int
+  wls_ip         String   @db.VarChar(15)
+  wls_approved   Int      @default(0)
+  wls_created_at DateTime @default(now()) @db.DateTime(0)
+  wls_city       String?  @db.VarChar(150)
+  wls_state      String?  @db.VarChar(150)
+  wls_country    String?  @db.VarChar(150)
+}
+
+model contratos {
+  ctr_id           Int       @id @default(autoincrement())
+  ctr_name         String?   @db.VarChar(255)
+  ctr_type         Int?
+  ctr_company      Int?
+  ctr_user         Int?
+  ctr_description  String?   @db.Text
+  ctr_number       String?   @db.VarChar(30)
+  ctr_hours        Float?
+  ctr_hoursLeft    Float?
+  ctr_startDate    DateTime? @db.DateTime(0)
+  ctr_expiringDate DateTime? @db.DateTime(0)
+  ctr_registeredAt DateTime  @default(now()) @db.DateTime(0)
+  ctr_contact      Int?
+  ctr_file         String?   @db.Text
+  ctr_price        Float?
+}
