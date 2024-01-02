@@ -67,7 +67,6 @@ routerFitTools.post('/register/new', validateJWT, async (req, res) => {
     }
 });
 
-
 routerFitTools.get('/registers/user/:user', validateJWT, async (req, res) => {
     const user = parseInt(req.params.user);
 
@@ -159,6 +158,77 @@ routerFitTools.get('/goals/user/:user', validateJWT, async (req, res) => {
     const newRegister = await prisma.goals.findMany({
         where: {
             gol_user: user
+        }
+    })
+    res.status(200).send(newRegister);
+});
+
+
+// BADGES
+
+routerFitTools.post('/badge/new', validateJWT, async (req, res) => {
+    const { type, user, goal  } = req.body;
+    try {
+        const newGoal = await prisma.badges.create({
+            data: {
+                bdg_type: type,
+                bdg_goal: goal,
+                bdg_user: user
+            }
+        })
+        res.status(200).send(newGoal);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching your products');
+    }
+});
+
+routerFitTools.get('/badges', validateJWT, async (req, res) => {
+    const newRegister = await prisma.badges.findMany()
+    res.status(200).send(newRegister);
+});
+
+routerFitTools.get('/badge/id/:id', validateJWT, async (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const newRegister = await prisma.badges.findFirst({
+        where: {
+            bdg_id: id
+        }
+    })
+    res.status(200).send(newRegister);
+});
+
+routerFitTools.get('/badge/user/:user/:type', validateJWT, async (req, res) => {
+    const user = parseInt(req.params.user);
+    const type = parseInt(req.params.type);
+
+    const newRegister = await prisma.badges.findMany({
+        where: {
+            bdg_user: user,
+            bdg_type: type
+        }
+    })
+    res.status(200).send(newRegister);
+});
+
+routerFitTools.get('/badge/type/:type', validateJWT, async (req, res) => {
+    const type = parseInt(req.params.type);
+
+    const newRegister = await prisma.badges.findMany({
+        where: {
+            bdg_type: type
+        }
+    })
+    res.status(200).send(newRegister);
+});
+
+routerFitTools.get('/badge/user/:user', validateJWT, async (req, res) => {
+    const user = parseInt(req.params.user);
+
+    const newRegister = await prisma.badges.findMany({
+        where: {
+            bdg_user: user
         }
     })
     res.status(200).send(newRegister);

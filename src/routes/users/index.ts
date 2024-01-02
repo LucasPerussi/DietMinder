@@ -179,6 +179,16 @@ routerUsers.get('/nutri/:nutriId', validateJWT, async (req, res) => {
     }
 })
 
+routerUsers.get('/all-nutritionists-data', validateJWT, async (req, res) => {
+    try {
+        const nutritionists = await prisma.nutritionists.findMany();
+        res.status(200).json({nutritionists});
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: 'We had an internal error looking for your data.'})
+    }
+})
+
 routerUsers.get('/all-nutritionists', validateJWT, async (req, res) => {
     const user = parseInt(req.params.user);
     try {

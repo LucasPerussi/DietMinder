@@ -1,4 +1,4 @@
-# DietMinder 🏋️🌿
+# DietMinder API 🏋️🌿
 
 DietMinder is an app to manage your diet progress, with many features that might keep your goals on track.
 

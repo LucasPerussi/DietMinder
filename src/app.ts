@@ -10,6 +10,7 @@ import { routerUsers } from './routes/users/index'
 import { routerAuth } from './routes/auth/index'
 import { routerProducts } from './routes/products/index'
 import { routerFitTools } from './routes/fitTools/index'
+import { routerNutri } from './routes/nutritionist/index'
 // import { JWTVerifier } from './middlewares/JWTVerifier.ts'
 
 // cria o app
@@ -26,3 +27,4 @@ app.use('/users', routerUsers)
 app.use('/auth', routerAuth)
 app.use('/products', routerProducts)
 app.use('/fitTools', routerFitTools)
+app.use('/nutri', routerNutri)
