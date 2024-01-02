@@ -2,7 +2,7 @@
 const crypto = require('crypto');
 
 export const codeGenerator = (length: number) => {
-    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*()_-+';
     var code = '';
     for (var i = 0; i < length; i++) {
         code += chars.charAt(Math.floor(Math.random() * chars.length));

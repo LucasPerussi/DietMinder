@@ -1,26 +1,26 @@
-# API Wetalk.it
+# DietMinder
 
-Trata-se de uma interface de comunicação entre o sistema da Wetalk, aplicativo e integrações com terceiros.
+DietMinder is an app to manage your diet progress, with many features that might keep your goals on track.
 
-Para instalar as dependências: 
+Installing dependencies: 
 
 ```console
   npm install
 ```
 
-Para iniciar o servidor em desenvolvimento: 
+Starting server in dev mode:
 
 ```console
   npm run dev
 ```
 
-Para iniciar o servidor em produção: 
+Starting prodution server:
 
 ```console
   npm start
 ```
 
-## Sobre o servidor:
+## About:
 
 ```browser
   http://localhost:3000
@@ -28,7 +28,7 @@ Para iniciar o servidor em produção:
   http://localhost:3000/projects
 ```
 
-## Tecnologias utilizadas:
+## Tech Info:
 
 * Node.js
 * Typescrypt,
