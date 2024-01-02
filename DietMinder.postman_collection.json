@@ -1,0 +1,891 @@
+{
+	"info": {
+		"_postman_id": "675f8f15-30a4-4d5b-882e-6ae08768ebc7",
+		"name": "DietMinder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17286749",
+		"_collection_link": "https://crimson-robot-722900.postman.co/workspace/Team-Workspace~1690a07e-ed0f-498d-8bef-72b3b980319f/collection/17286749-675f8f15-30a4-4d5b-882e-6ae08768ebc7?action=share&source=collection_link&creator=17286749"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sessions",
+					"item": [
+						{
+							"name": "All Sessions",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}auth/sessions",
+									"host": [
+										"{{server}}auth"
+									],
+									"path": [
+										"sessions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All Sessions by User",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}auth/sessions/8",
+									"host": [
+										"{{server}}auth"
+									],
+									"path": [
+										"sessions",
+										"8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"perussilucas@hotmail.com\",\r\n    \"password\": \"Josi@nep1979\",\r\n    \"name\": \"Lucas\",\r\n    \"last_name\": \"Perussi\",\r\n    \"birthday\": \"1999-07-28T00:00:00.000Z\",\r\n    \"sex\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}auth/new",
+							"host": [
+								"{{server}}auth"
+							],
+							"path": [
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"perussilucas@hotmail.com\",\r\n    \"password\": \"Josi@nep1979\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}auth/login",
+							"host": [
+								"{{server}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "root auth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}auth",
+							"host": [
+								"{{server}}auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Nutritionists",
+					"item": [
+						{
+							"name": "New Nutritionist",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": 8,\r\n    \"address\": \"Sete de setembro, 3000. Apt 2112\",\r\n    \"crn\": \"CRN 123213/24\",\r\n    \"logo\": \"\",\r\n    \"stamp\": \"saddsafsdfsdf\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}users/nutritionist/new",
+									"host": [
+										"{{server}}users"
+									],
+									"path": [
+										"nutritionist",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List all nutritionists",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}users/all-nutritionists",
+									"host": [
+										"{{server}}users"
+									],
+									"path": [
+										"all-nutritionists"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Load Nutritionist by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}users/nutri/3",
+									"host": [
+										"{{server}}users"
+									],
+									"path": [
+										"nutri",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Load Nutritionist by User",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}users/nutri/user/8",
+									"host": [
+										"{{server}}users"
+									],
+									"path": [
+										"nutri",
+										"user",
+										"8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Patients",
+					"item": [
+						{
+							"name": "New Patient",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user\": 8,\r\n    \"nutritionist\": 3,\r\n    \"athlete\": 1\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}users/patient/new",
+									"host": [
+										"{{server}}users"
+									],
+									"path": [
+										"patient",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List all patients",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}users/all-patients",
+									"host": [
+										"{{server}}users"
+									],
+									"path": [
+										"all-patients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Load patient by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}users/patient/2",
+									"host": [
+										"{{server}}users"
+									],
+									"path": [
+										"patient",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Load patient by Id Copy",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}users/patient/user/8",
+									"host": [
+										"{{server}}users"
+									],
+									"path": [
+										"patient",
+										"user",
+										"8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Complete User Account",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"height\": 1.87,\r\n    \"weight\": 95.0,\r\n    \"picture\": \"keep\",\r\n    \"phone\": \"41 9 8814-7863\",\r\n    \"city\": \"Curitiba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}users/complete",
+							"host": [
+								"{{server}}users"
+							],
+							"path": [
+								"complete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "root users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}users",
+							"host": [
+								"{{server}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Load user by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}users/get/8",
+							"host": [
+								"{{server}}users"
+							],
+							"path": [
+								"get",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}users/all",
+							"host": [
+								"{{server}}users"
+							],
+							"path": [
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all nutritionists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}users/all-nutritionists",
+							"host": [
+								"{{server}}users"
+							],
+							"path": [
+								"all-nutritionists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all members",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}users/all-members",
+							"host": [
+								"{{server}}users"
+							],
+							"path": [
+								"all-members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all admins",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}users/all-admins",
+							"host": [
+								"{{server}}users"
+							],
+							"path": [
+								"all-admins"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fit Tools",
+			"item": [
+				{
+					"name": "Registers",
+					"item": [
+						{
+							"name": "New Register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": 1,\r\n    \"value\": 1.4,\r\n    \"user\": 8\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}fitTools/register/new",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"register",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all registers",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/registers",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"registers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all registers by user",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/registers/user/8",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"registers",
+										"user",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all  user and type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/registers/user/8/1",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"registers",
+										"user",
+										"8",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all registers by type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/registers/type/1",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"registers",
+										"type",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all registers by id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/registers/id/1",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"registers",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Goals",
+					"item": [
+						{
+							"name": "New Goal",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Este é meu Goal de teste ihaa\",\r\n    \"type\": 1,\r\n    \"value\": 100.2,\r\n    \"user\": 8,\r\n    \"targetDate\": \"2024-10-02T05:17:32.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}fitTools/goal/new",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"goal",
+										"new"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all goals",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/goals",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"goals"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get goal by id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/goals/id/1",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"goals",
+										"id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all goals by type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/goals/type/1",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"goals",
+										"type",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get all goals by user",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/goals/user/8",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"goals",
+										"user",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all  user and type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}fitTools/goals/user/8/1",
+									"host": [
+										"{{server}}fitTools"
+									],
+									"path": [
+										"goals",
+										"user",
+										"8",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fit Tools root",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}fitTools",
+							"host": [
+								"{{server}}fitTools"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DietMinder root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}",
+					"host": [
+						"{{server}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
