@@ -5,7 +5,6 @@
   "main": "server.ts",
   "scripts": {
     "start": "pm2 ts-node src/server.ts",
-    "production": "tsc && pm2 start src/server.js --name src/server.ts --interpreter ts-node",
     "dev": "nodemon --exec ts-node src/server.ts",
     "test": "nodemon --exec ts-node src/server.ts"
   },
