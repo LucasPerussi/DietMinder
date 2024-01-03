@@ -74,79 +74,84 @@ routerAuth.post('/login', async (req, res) => {
 
 routerAuth.post('/new', async (req, res) => {
     const { email, password, name, last_name, birthday, sex } = req.body;
+
+    // Check if any required parameter is missing
+    if (!email || !password || !name || !last_name || !birthday || !sex) {
+        return res.status(400).json({ message: 'Invalid request data. Please provide all required parameters.' });
+    }
+
     let role = 1;
     let doubleStepper = 1;
     let theme = 1;
 
-        try {
+    try {
         const userAlreadyExists = await userExists(email);
 
         if (userAlreadyExists) {
             console.log("Trying to create a new user for an existing account: " + email)
-            res.status(400).json({ message: 'This account already exists' })
-        } else {
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const username = await generateUsername(name, last_name);
-            try {
-                await prisma.user.createMany({
-                    data: [
-                        {
-                            usr_doubleStep: doubleStepper,
-                            usr_email: email,
-                            usr_last_name: last_name,
-                            usr_name: name,
-                            usr_sex: sex,
-                            usr_theme: theme,
-                            usr_role: role,
-                            usr_password: hashedPassword, 
-                            usr_born_date: birthday,
-                            usr_username: username
-                        }
-                    ]
-                });
-            } catch (error) {
-                console.error('Erro durante a criação de usuário:', error);
-                return res.status(500).json({ message: 'Erro interno do servidor.' });
-            }
+            return res.status(400).json({ message: 'This account already exists' });
+        }
 
-            const createdUser = await prisma.user.findUnique({
-                where: { usr_email: email },
-                select: {
-                    usr_id: true,
-                    usr_email: true,
-                    usr_name: true,
-                    usr_last_name: true,
-                    usr_role: true,
-                    usr_username: true
-                }
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const username = await generateUsername(name, last_name);
+
+        try {
+            await prisma.user.createMany({
+                data: [
+                    {
+                        usr_doubleStep: doubleStepper,
+                        usr_email: email,
+                        usr_last_name: last_name,
+                        usr_name: name,
+                        usr_sex: sex,
+                        usr_theme: theme,
+                        usr_role: role,
+                        usr_password: hashedPassword,
+                        usr_born_date: birthday,
+                        usr_username: username
+                    }
+                ]
+            });
+        } catch (error) {
+            console.error('Error during user creation:', error);
+            return res.status(500).json({ message: 'Internal server error.' });
+        }
+
+        const createdUser = await prisma.user.findUnique({
+            where: { usr_email: email },
+            select: {
+                usr_id: true,
+                usr_email: true,
+                usr_name: true,
+                usr_last_name: true,
+                usr_role: true,
+                usr_username: true
+            }
+        });
+
+        if (createdUser) {
+            const code = await sessionGenerator(createdUser.usr_id);
+            if (code === "Error") {
+                return res.status(505).json({ message: 'Internal server error. Please contact support.' });
+            }
+            console.log(code);
+
+            const token = jwt.sign({
+                user: createdUser.usr_id,
+                role: createdUser.usr_role,
+                client: 'API'
+            }, code, {
+                expiresIn: '2h',
             });
 
-            if (createdUser) {
-                const code: string = await sessionGenerator(createdUser.usr_id)
-                if (code === "Error") {
-                    res.status(505).json({ message: 'Erro interno do servidor. Entre em contato com o suporte' });
-                }
-                console.log(code)
-        
-                const token = jwt.sign({
-                    user: createdUser.usr_id,
-                    role: createdUser.usr_role,
-                    client: 'API'
-                }, code, {
-                    expiresIn: '2h',
-                });
-
-                res.status(200).json({
-                    token,
-                    createdUser
-                });
-            }
-
-
+            return res.status(200).json({
+                token,
+                createdUser
+            });
         }
     } catch (error) {
-        console.error('Erro durante a criação de usuário:', error);
-        res.status(500).json({ message: 'Erro interno do servidor.' });
+        console.error('Error during user creation:', error);
+        return res.status(500).json({ message: 'Internal server error.' });
     }
 });
 
