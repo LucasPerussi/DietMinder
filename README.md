@@ -36,5 +36,6 @@ Starting prodution server:
 * Express 
 * Prisma ORM
 * JWT (Json Web Tokens)
+* Jest (Tests)
 
 
